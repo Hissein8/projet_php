@@ -3,27 +3,7 @@ require_once 'entete.php';
 require_once 'menu.php';
 ?>
 
-<!-- <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion - Site d'Actualités</title>
-    <script src="https://kit.fontawesome.com/61523b4b4d.js"></script>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
 
-    <nav>
-        <div><i class="fa-solid fa-newspaper"> News </i></div>
-        <div> <i class="fa-solid fa-house"> <a id="link" href="index.php"> Home </a> </i> </div>
-        <div><i class="fa-regular fa-user"></i> <button><a id="link" href="connexion.php"> Se connecter </a></button></div>
-    </nav> -->
-    <!-- <nav>
-        <div><i class="fa-solid fa-newspaper"></i> News</div>
-        <div><i class="fa-solid fa-house"></i> <a href="index.php" style="color: inherit; text-decoration: none;">Home</a></div>
-        <div><i class="fa-regular fa-user"></i> Connexion</div>
-    </nav> -->
 
     <div class="login-container">
         <form action="" method="POST" class="login-form">
@@ -40,6 +20,17 @@ require_once 'menu.php';
                         <option value="administrateur">Administrateur</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <!-- <label for="username"><i class="fa-solid fa-user"></i> Nom d'utilisateur :</label> -->
+                    <label for="firstname"> Prénom :</label>
+                    <input type="text" id="firstname" name="firstname" required placeholder="Entrez votre prénom">
+                </div>
+                <div class="form-group">
+                    <!-- <label for="username"><i class="fa-solid fa-user"></i> Nom d'utilisateur :</label> -->
+                    <label for="lastname"> Nom :</label>
+                    <input type="text" id="lastname" name="lastname" required placeholder="Entrez votre nom">
+                </div>
+
 
                 <div class="form-group">
                     <!-- <label for="username"><i class="fa-solid fa-user"></i> Nom d'utilisateur :</label> -->

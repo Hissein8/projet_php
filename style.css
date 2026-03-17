@@ -1,0 +1,332 @@
+nav, section, footer, header, .menu-container {
+    display: flex;  /* Active Flexbox */
+    justify-content: space-between;  /* Distribue : gauche, centre, droite */
+    align-items: center;  /* Centre verticalement (optionnel, pour l'alignement vertical) */
+}
+
+nav div, header div {
+    margin: 18px;
+}
+
+hr  {
+    border: none;  /* Supprime la bordure par défaut */
+    border-top: 1px solid #ccc;  /* Ajoute une ligne horizontale */
+    margin: 20px 0;  /* Espace au-dessus et en dessous de la ligne */
+}
+
+
+link {
+    text-decoration: none;
+    /* color: inherit; */
+    color: #0c0b0b;
+}
+
+/* Styles pour les liens de navigation */
+.nav-link {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #007bff;
+}
+
+/* Styles pour le menu d'administration */
+.admin-menu {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.admin-links {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.admin-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px solid #007bff;
+}
+
+.admin-link:hover {
+    background-color: white;
+    color: #007bff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+.admin-link i {
+    font-size: 16px;
+}
+
+/* Responsive pour le menu admin */
+@media (max-width: 768px) {
+    .admin-links {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .admin-link {
+        width: 100%;
+        max-width: 250px;
+        justify-content: center;
+    }
+}
+
+
+/* Styles pour le formulaire de connexion */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    margin: 10px;
+    padding: 20px;
+}
+
+.login-form {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 18px;
+    width: 80%;
+    max-width: 350px;
+    border: 1px solid #ddd;
+}
+
+.login-form fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.login-form legend {
+    font-size: 20px;
+    font-weight: 350;
+    color: #333;
+    text-align: center;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #101112;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #0c0101;
+    font-weight: 350;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 12px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #030303;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.form-group input[type="password"] {
+    font-family: 'Courier New', monospace;
+}
+
+.login-btn {
+    width: 70%;
+    padding: 14px;
+    background-color: #0d1014;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    margin-left: 15%;
+}
+
+.login-btn:hover {
+    background-color: #3e4042;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(75, 76, 77, 0.3);
+}
+
+.login-btn:active {
+    transform: translateY(0);
+}
+
+/* Styles pour les icônes dans le formulaire */
+.form-group {
+    position: relative;
+}
+
+.form-group i {
+    position: absolute;
+    right: 15px;
+    top: 40px;
+    color: #999;
+    font-size: 16px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .login-form {
+        padding: 30px 20px;
+        margin: 20px;
+    }
+    
+    .login-form legend {
+        font-size: 20px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Styles pour la barre de thèmes */
+.themes-container {
+    display: flex;  /* Flexbox pour aligner horizontalement */
+    gap: 10px;     /* Espace entre les boutons */
+    padding: 20px;
+    /* justify-content: space-between; */
+    background-color: #f5f5f5;
+    border-bottom: 2px solid #0c0b0b;
+    flex-wrap: wrap;  /* Les boutons passent à la ligne si nécessaire */
+}
+
+.theme-btn {
+    padding: 10px 20px;
+    border: 2px solid #0c0e0f;
+    background-color: white;
+    color: #0d0d0e;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.theme-btn:hover {
+    background-color: #e7f3ff;
+    transform: translateY(-2px);
+}
+
+.theme-btn.active {
+    background-color: #101112;
+    color: white;
+}
+
+
+
+
+
+
+/* Styles pour les articles */
+.articles-container {
+    display: flex;
+    flex-direction: column;  /* Affiche les articles en colonne */
+    gap: 20px;
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.article {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.article:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
+}
+
+.article h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+    font-size: 20px;
+}
+
+.article p {
+    color: #666;
+    line-height: 1.6;
+    margin: 10px 0;
+}
+
+.category-badge {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 10px !important;
+}
+
+.article small {
+    color: #999;
+    font-size: 12px;
+}
+
+/* Animation de disparition/apparition */
+.article {
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.article.hidden {
+    display: none;
+}
+

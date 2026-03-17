@@ -15,7 +15,7 @@ require_once 'menu.php';
                     <label for="usertype"> Type d'utilisateur :</label>
                     <select name="usertype" id="usertype" required>
                         <option value="">Sélectionnez un type</option>
-                        <option value="visiteur">Visiteur</option>
+                        <!-- <option value="visiteur">Visiteur</option> -->
                         <option value="editeur">Éditeur</option>
                         <option value="administrateur">Administrateur</option>
                     </select>

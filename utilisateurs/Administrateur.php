@@ -61,14 +61,14 @@ class Administrateur
     // Update (Mettre à jour les informations d'un utilisateur)
 
     // Delete (Supprimer un utilisateur)
-    public function delete($login)
+    public function delete($id)
     {
         try {
-            $sql = "DELETE FROM utilisateurs WHERE login = :login";
+            $sql = "DELETE FROM utilisateurs WHERE id = :id";
 
             $stmt = $this->bd->prepare($sql);
 
-            return $stmt->execute([':login' => $login]);
+            return $stmt->execute([':id' => $id]);
         } catch (Exception $e) {
             error_log($e->getMessage());
             return false;

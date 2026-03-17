@@ -20,7 +20,7 @@ USE actualites;
 CREATE TABLE IF NOT EXISTS categories (
     id          INT AUTO_INCREMENT PRIMARY KEY,
     nom         VARCHAR(100) NOT NULL UNIQUE
-    -- description TEXT
+    description TEXT
 ) ENGINE=InnoDB;
 
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS utilisateurs (
     login         VARCHAR(100) NOT NULL UNIQUE,
     mot_de_passe  VARCHAR(255) NOT NULL,
     role          ENUM('editeur', 'administrateur') NOT NULL
-    -- date_creation DATETIME DEFAULT CURRENT_TIMESTAMP
+    date_creation DATETIME DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
 -- 4. Table des articles

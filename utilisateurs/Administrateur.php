@@ -13,11 +13,14 @@ class Administrateur
     // CRUD = Create, Read, Update, Delete
 
     // Create (Créer un nouvel utilisateur)
-    public function create($nom, $prenom, $login, $password, $role)
+    public function create($nom, $prenom, $login, $mot_de_passe, $role)
     {
         try {
-            $sql = "INSERT INTO utilisateurs (nom, prenom, login, password, role)
-            VALUES(:nom, :prenom, :login, :password, :role)";
+            $sql = "INSERT INTO utilisateurs (nom, prenom, login, mot_de_passe, role)
+            VALUES(:nom, :prenom, :login, :mot_de_passe, :role)";
+
+            // hacher le mot de passe avant de le stocker
+            $mot_de_passe = password_hash($mot_de_passe, PASSWORD_BCRYPT);
 
             // Préparer la requête SQL
             $stmt = $this->bd->prepare($sql);
@@ -27,7 +30,7 @@ class Administrateur
                 ':nom' => $nom,
                 ':prenom' => $prenom,
                 ':login' => $login,
-                ':password' => $password,
+                ':mot_de_passe' => $mot_de_passe,
                 ':role' => $role
             ]);
 
@@ -56,4 +59,5 @@ class Administrateur
     }
 
     // Update (Mettre à jour les informations d'un utilisateur)
+    
 }

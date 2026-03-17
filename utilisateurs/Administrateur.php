@@ -59,5 +59,20 @@ class Administrateur
     }
 
     // Update (Mettre à jour les informations d'un utilisateur)
+
+    // Delete (Supprimer un utilisateur)
+    public function delete($login)
+    {
+        try {
+            $sql = "DELETE FROM utilisateurs WHERE login = :login";
+
+            $stmt = $this->bd->prepare($sql);
+
+            return $stmt->execute([':login' => $login]);
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+    }
     
 }

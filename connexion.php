@@ -50,7 +50,7 @@ require_once 'menu.php';
             </fieldset>
         </form>
     </div>
-    <script src="script.js"></script>
+    <script src="/script.js"></script>
 
     <script>
         // Validation du formulaire de connexion

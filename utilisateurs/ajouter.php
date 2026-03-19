@@ -35,6 +35,7 @@ require_once '../menu.php';
     </form>
 </div>
 <?php
+// Traitement du formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         $prenom = $_POST['prenom'];

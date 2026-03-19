@@ -45,6 +45,7 @@ $user = $stmt->fetch();
 </div>
 
 <?php 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $sql = "UPDATE utilisateurs SET prenom = :prenom, nom = :nom, login = :login, role = :role WHERE id = :id";
 $stmt = $db->prepare($sql);
 $stmt->execute([
@@ -66,5 +67,5 @@ if (!empty($_POST['password'])) {
 }
 
 echo "Modification effectue avec succes";
-
+}
 ?>

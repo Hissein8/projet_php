@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $existingCategory = $stmt2->fetch(PDO::FETCH_ASSOC);
         if ($existingCategory) {
             echo "<p class='error'>Une catégorie avec ce nom existe déjà.</p>";
-            exit;
+            exit();
         }
 
         $stmt = $db->prepare("INSERT INTO categories (nom) VALUES (?)");

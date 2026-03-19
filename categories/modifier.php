@@ -4,7 +4,7 @@ require_once '../menu.php';
 require_once '../db.php';
 
 if (!isset($_GET['id']) || empty($_GET['id'])) {
-    header('Location: liste.php');
+    header('Location: lister.php');
     exit;
 }
 
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!empty($nom)) {
         $stmt = $db->prepare("UPDATE categories SET nom = ? WHERE id = ?");
         $stmt->execute([$nom, $id]);
-        header('Location: liste.php');
+        header('Location: lister.php');
         exit;
     }
 } else {

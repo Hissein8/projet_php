@@ -1,7 +1,14 @@
 <?php
 require_once '../db.php';
 require_once '../entete.php';
+
+if (!isset($_SESSION['user']) || $_SESSION['user']['usertype'] !== 'admin') {
+    echo "<p class='error'>Accès refusé. Vous n'avez pas les permissions nécessaires pour accéder à cette page.</p>";
+    exit();
+}
+
 require_once '../menu.php';
+
 
 //echo "<h2>Modifier un utilisateur</h2>";
 $id = $_GET['id'];

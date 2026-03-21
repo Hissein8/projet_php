@@ -18,7 +18,7 @@
         <a href="<?php echo $basePath; ?>/articles/liste.php" class="admin-link">
             <i class="fa-solid fa-list"></i> Gérer les articles
         </a>
-        <a href="<?php echo $basePath; ?>/categories/liste.php" class="admin-link">
+        <a href="<?php echo $basePath; ?>/categories/lister.php" class="admin-link">
             <i class="fa-solid fa-tags"></i> Gérer les catégories
         </a>
         <?php if ($_SESSION['role'] === 'administrateur') : ?>

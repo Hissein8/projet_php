@@ -45,14 +45,14 @@ require_once 'menu.php';
             <div class="form-group">
                 <label for="username">Nom d'utilisateur :</label>
                 <input type="text" id="username" name="username" required
-                       placeholder="Entrez votre nom d'utilisateur"
-                       value="<?php echo htmlspecialchars($_POST['username'] ?? ''); ?>">
+                    placeholder="Entrez votre nom d'utilisateur"
+                    value="<?php echo htmlspecialchars($_POST['username'] ?? ''); ?>">
             </div>
 
             <div class="form-group">
                 <label for="password">Mot de passe :</label>
                 <input type="password" id="password" name="password" required
-                       placeholder="Entrez votre mot de passe">
+                    placeholder="Entrez votre mot de passe">
             </div>
 
             <button type="submit" class="login-btn">
@@ -63,38 +63,38 @@ require_once 'menu.php';
 </div>
 
 <script>
-document.querySelector('.login-form').addEventListener('submit', function(e) {
-    const username = document.getElementById('username').value.trim();
-    const password = document.getElementById('password').value;
-    let isValid = true;
-    let errorMessage = '';
+    document.querySelector('.login-form').addEventListener('submit', function(e) {
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value;
+        let isValid = true;
+        let errorMessage = '';
 
-    if (username.length < 2) {
-        isValid = false;
-        errorMessage += 'Le nom d\'utilisateur doit contenir au moins 2 caractères.\n';
-        document.getElementById('username').style.borderColor = '#dc3545';
-    } else {
-        document.getElementById('username').style.borderColor = '#28a745';
-    }
+        if (username.length < 2) {
+            isValid = false;
+            errorMessage += 'Le nom d\'utilisateur doit contenir au moins 2 caractères.\n';
+            document.getElementById('username').style.borderColor = '#dc3545';
+        } else {
+            document.getElementById('username').style.borderColor = '#28a745';
+        }
 
-    if (password.length < 3) {
-        isValid = false;
-        errorMessage += 'Le mot de passe doit contenir au moins 3 caractères.\n';
-        document.getElementById('password').style.borderColor = '#dc3545';
-    } else {
-        document.getElementById('password').style.borderColor = '#28a745';
-    }
+        if (password.length < 3) {
+            isValid = false;
+            errorMessage += 'Le mot de passe doit contenir au moins 3 caractères.\n';
+            document.getElementById('password').style.borderColor = '#dc3545';
+        } else {
+            document.getElementById('password').style.borderColor = '#28a745';
+        }
 
-    if (!isValid) {
-        e.preventDefault();
-        alert(errorMessage);
-    }
-});
+        if (!isValid) {
+            e.preventDefault();
+            alert(errorMessage);
+        }
+    });
 
-document.getElementById('username').addEventListener('input', function() {
-    this.style.borderColor = '#ddd';
-});
-document.getElementById('password').addEventListener('input', function() {
-    this.style.borderColor = '#ddd';
-});
+    document.getElementById('username').addEventListener('input', function() {
+        this.style.borderColor = '#ddd';
+    });
+    document.getElementById('password').addEventListener('input', function() {
+        this.style.borderColor = '#ddd';
+    });
 </script>

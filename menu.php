@@ -5,24 +5,24 @@
 <nav>
 
     <!-- Accueil toujours visible -->
-    <div><i class="fa-solid fa-house"></i> <a href="accueil.php" class="nav-link">Home</a></div>
+    <div><i class="fa-solid fa-house"></i> <a href="<?php echo $basePath; ?>/accueil.php" class="nav-link">Home</a></div>
 
 <!-- Menu d'administration (visible seulement pour éditeurs et admins) -->
-<?php if (isset($_SESSION['username']) &&
-          ($_SESSION['username']['usertype'] === 'editeur' || $_SESSION['username']['usertype'] === 'admin')) : ?>
+<?php if (isset($_SESSION['role']) &&
+          ($_SESSION['role'] === 'editeur' || $_SESSION['role'] === 'administrateur')) : ?>
 <div class="admin-menu">
     <div class="admin-links">
-        <a href="articles/ajouter.php" class="admin-link">
+        <a href="<?php echo $basePath; ?>/articles/ajouter.php" class="admin-link">
             <i class="fa-solid fa-plus"></i> Ajouter un article
         </a>
-        <a href="articles/liste.php" class="admin-link">
+        <a href="<?php echo $basePath; ?>/articles/liste.php" class="admin-link">
             <i class="fa-solid fa-list"></i> Gérer les articles
         </a>
-        <a href="categories/liste.php" class="admin-link">
+        <a href="<?php echo $basePath; ?>/categories/liste.php" class="admin-link">
             <i class="fa-solid fa-tags"></i> Gérer les catégories
         </a>
-        <?php if ($_SESSION['username']['usertype'] === 'admin') : ?>
-        <a href="utilisateurs/liste.php" class="admin-link">
+        <?php if ($_SESSION['role'] === 'administrateur') : ?>
+        <a href="<?php echo $basePath; ?>/utilisateurs/liste.php" class="admin-link">
             <i class="fa-solid fa-users"></i> Gérer les utilisateurs
         </a>
         <?php endif; ?>
@@ -32,4 +32,4 @@
 
 <hr>
 
-<script src="/script.js"></script>
+<script src="<?php echo $basePath; ?>/script.js"></script>

@@ -1,8 +1,9 @@
 <?php
+session_start();
 require_once '../db.php';
 require_once '../entete.php';
 
-if (!isset($_SESSION['user']) || $_SESSION['user']['usertype'] !== 'admin') {
+if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'administrateur') {
     echo "<p class='error'>Accès refusé. Vous n'avez pas les permissions nécessaires pour accéder à cette page.</p>";
     exit();
 }

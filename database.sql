@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS utilisateurs (
     nom           VARCHAR(100) NOT NULL,
     prenom        VARCHAR(100) NOT NULL,
     login         VARCHAR(100) NOT NULL UNIQUE,
-    mot_de_passe  VARCHAR(255) NOT NULL,
+    password      VARCHAR(255) NOT NULL,
     role          ENUM('editeur', 'administrateur') NOT NULL,
     date_creation DATETIME DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
@@ -72,7 +72,7 @@ INSERT INTO categories (nom) VALUES
 -- Utilisateurs
 -- admin     → mot de passe : admin123
 -- editeur1  → mot de passe : edit123
-INSERT INTO utilisateurs (nom, prenom, login, mot_de_passe, role) VALUES
+INSERT INTO utilisateurs (nom, prenom, login, password, role) VALUES
 ('Diop', 'Amadou', 'diopamadou','password1','administrateur'),
 ('Fall', 'Fatou', 'fallfatou','password2','editeur'),
 ('Ba', 'Mamadou', 'bamamadou','password3','editeur');

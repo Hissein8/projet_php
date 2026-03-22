@@ -7,34 +7,36 @@ function authentifier($nomUtilisateur, $password, $role) {
     global $db;
     $stmt = $db->prepare("SELECT * FROM utilisateurs WHERE login = ? AND role = ?");
     $stmt->execute([$nomUtilisateur, $role]);
-    $user = $stmt->fetch();
-    if ($user && password_verify($password, $user['password'])) {
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($user && ($password === $user['password'])) {
         return $user;
     }
     return false;
 }
 
 
-if (isset($_SESSION['user']) && ($_SESSION['user']['role'] === 'editeur' || $_SESSION['user']['role'] === 'administrateur')) {
-    
-    echo "<p class='success'>Vous êtes déjà connecté en tant que " . htmlspecialchars($_SESSION['user']['login']) . " (" . htmlspecialchars($_SESSION['user']['role']) . ").</p>";
-    echo "<p><a href='deconnexion.php' class='btn'>Se déconnecter</a></p>";
-    header('Location: accueil.php');
+if (isset($_SESSION['user']) && in_array($_SESSION['user']['role'], ['editeur', 'administrateur'])) {
+    header('Location: index.php');
     exit();
 }
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nomUtilisateur = $_POST['username'];
-    $password = $_POST['password'];
-    $role = $_POST['usertype'];
-    $user = authentifier($nomUtilisateur, $password, $role);
-    if ($user) {
-        $_SESSION['user'] = $user;
-        header('Location: accueil.php');
-        exit();
+    $nomUtilisateur = trim($_POST['username'] ?? '');
+    $password = $_POST['password'] ?? '';
+    $role = $_POST['usertype'] ?? '';
+
+    if (empty($nomUtilisateur) || empty($password) || empty($role)) {
+        $error = "Tous les champs sont obligatoires.";
     } else {
-        echo "<p class='error'>Nom d'utilisateur, mot de passe ou type d'utilisateur incorrect.</p>";
+        $user = authentifier($nomUtilisateur, $password, $role);
+        if ($user) {
+            $_SESSION['user'] = $user;
+            header('Location: index.php');
+            exit();
+        } else {
+            $error = "Nom d'utilisateur, mot de passe ou type d'utilisateur incorrect.";
+        }
     }
 }
 ?>
@@ -56,25 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <option value="administrateur">Administrateur</option>
                     </select>
                 </div>
-
-
-                <!-- pas besoin de prénom pour la connexion, on peut le supprimer du formulaire et de la validation -->
-                
-                <!-- <div class="form-group"> -->
-                    <!-- <label for="username"><i class="fa-solid fa-user"></i> Nom d'utilisateur :</label> -->
-                    <!-- <label for="firstname"> Prénom :</label> -->
-                    <!-- <input type="text" id="firstname" name="firstname" required placeholder="Entrez votre prénom"> -->
-                <!-- </div> -->
-
-
-                <!-- pas besoin de nom pour la connexion, on peut le supprimer du formulaire et de la validation --> 
-                <!-- <div class="form-group"> -->
-                    <!-- <label for="username"><i class="fa-solid fa-user"></i> Nom d'utilisateur :</label> -->
-                    <!-- <label for="lastname"> Nom :</label> -->
-                    <!-- <input type="text" id="lastname" name="lastname" required placeholder="Entrez votre nom"> -->
-                <!-- </div> -->
-
-
                 <div class="form-group">
                     <!-- <label for="username"><i class="fa-solid fa-user"></i> Nom d'utilisateur :</label> -->
                     <label for="username"> Nom d'utilisateur :</label>

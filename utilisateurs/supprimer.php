@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once '../db.php';
 require_once '../entete.php';
 
@@ -10,29 +9,33 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'administrateur')
 
 require_once '../menu.php';
 
+$id = (int)($_GET['id'] ?? 0);
+if ($id <= 0) { header('Location: liste.php'); exit; }
 
+$stmt = $db->prepare("SELECT * FROM utilisateurs WHERE id = ?");
+$stmt->execute([$id]);
+$utilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
+if (!$utilisateur) { header('Location: liste.php'); exit; }
 
-$id = $_GET['id'];
-$sql = "SELECT * FROM utilisateurs WHERE id = :id";
-$stmt = $db->prepare($sql);
-$stmt->execute([':id'=>$id]);
-$user = $stmt->fetch();
-?>
-<?php // Pourquoi POST et pas GET?
-// POST est utilisé pour les actions qui modifient des données, comme la suppression, pour éviter les suppressions accidentelles via des liens GET.
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') { ?>
-<h2>Voulez vous vraiment supprimer <?php echo htmlspecialchars($user['prenom']) . " " . htmlspecialchars($user['nom']) . " (" . htmlspecialchars($user['login']) . ")"; ?> ?</h2>
-<form action="supprimer.php?id=<?php echo $id; ?>" method="post">
-    <button type="submit" class="btn">Oui</button>
-    <a href="liste.php" class="btn">Non</a>
-</form>
-<?php } ?>
-<?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $sql = "DELETE FROM utilisateurs WHERE id = :id";
-    $stmt = $db->prepare($sql);
-    $stmt->execute([':id' => $id]);
-    echo "<p>Utilisateur supprimé avec succès.</p>";
-    echo "<a href='liste.php' class='btn'>Retour à la liste</a>";
+    $stmt = $db->prepare("DELETE FROM utilisateurs WHERE id = ?");
+    $stmt->execute([$id]);
+    header('Location: liste.php');
+    exit;
 }
 ?>
+
+<!-- <h2>Supprimer un utilisateur</h2>
+
+<p>Êtes-vous sûr de vouloir supprimer 
+    <strong><?= htmlspecialchars($utilisateur['prenom']) ?> <?= htmlspecialchars($utilisateur['nom']) ?></strong>
+    (<?= htmlspecialchars($utilisateur['login']) ?>) ?
+</p>
+
+<form action="supprimer.php?id=<?= $id ?>" method="POST">
+    <button type="submit" class="btn btn-delete">Oui, supprimer</button>
+    <a href="liste.php" class="btn btn-edit">Annuler</a>
+</form>
+
+</body>
+</html> -->

@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once '../db.php';
 require_once '../entete.php';
 
@@ -11,16 +10,45 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'administrateur')
 require_once '../menu.php';
 
 
-$sql = "SELECT * FROM utilisateurs";
-$stmt = $db->prepare($sql);
-$stmt->execute();
-$utilisateurs = $stmt->fetchAll();
-
-foreach ($utilisateurs as $user) {
-    echo "ID: " . htmlspecialchars($user['id']) . " <a href='modifier.php?id=" . $user['id'] . "'>Modifier</a> <a href='supprimer.php?id=" . $user['id'] . "'>Supprimer</a><br>";
-    echo "Nom: " . htmlspecialchars($user['nom']) . "<br>";
-    echo "Prenom: " . htmlspecialchars($user['prenom']) . "<br>";
-    echo "Login: " . htmlspecialchars($user['login']) . "<br>";
-    echo "Role: " . htmlspecialchars($user['role']) . "<br><hr>";
-}
+$utilisateurs = $db->query("SELECT * FROM utilisateurs ORDER BY nom")->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
+<a href="ajouter.php" class="btn-new">
+    <i class="fa-solid fa-plus"></i> Nouvel utilisateur
+</a>
+
+<h2>Liste des utilisateurs</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Login</th>
+            <th>Rôle</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($utilisateurs as $utilisateur) : ?>
+        <tr>
+            <td><?= htmlspecialchars($utilisateur['id']) ?></td>
+            <td><?= htmlspecialchars($utilisateur['nom']) ?></td>
+            <td><?= htmlspecialchars($utilisateur['prenom']) ?></td>
+            <td><?= htmlspecialchars($utilisateur['login']) ?></td>
+            <td><?= htmlspecialchars($utilisateur['role']) ?></td>
+            <td>
+                <a href="modifier.php?id=<?= (int)$utilisateur['id'] ?>" class="btn btn-edit">
+                    <i class="fa-solid fa-pen-to-square">Modifier</i>
+                </a>
+                <a href="supprimer.php?id=<?= (int)$utilisateur['id'] ?>" class="btn btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
+                    <i class="fa-solid fa-trash">Supprimer</i>
+                </a>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+</body>
+</html>

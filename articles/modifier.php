@@ -3,9 +3,9 @@ require_once '../db.php';
 require_once '../entete.php';
 require_once '../menu.php';
 
-if (!isset($_SESSION['user_role']) ||
-    !in_array($_SESSION['user_role'], ['editeur', 'administrateur'])) {
-    header('Location: ../connexion.php'); exit;
+if (!isset($_SESSION['user']) || ($_SESSION['user']['role'] !== 'administrateur' && $_SESSION['user']['role'] !== 'editeur')) {
+    echo "<p class='error'>Accès refusé. Vous n'avez pas les permissions nécessaires pour accéder à cette page.</p>";
+    exit(); 
 }
 
 function e($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
@@ -58,8 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </p>
     <?php endforeach; ?>
 
-    <form method="POST" action="" id="form-modifier" novalidate style="display:flex;flex-direction:column;gap:16px;">
-
+    <!-- <form method="POST" action="" id="form-modifier" novalidate style="display:flex;flex-direction:column;gap:16px;"> -->
+    <form method="POST" class="form-container" action="modifier.php?id=<?= $id ?>" id="form-modifier">
         <div class="form-group">
             <label for="titre">Titre *</label>
             <input type="text" id="titre" name="titre" required maxlength="255" value="<?= e($article['titre']) ?>">

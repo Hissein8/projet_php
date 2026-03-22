@@ -5,7 +5,7 @@ require_once '../menu.php';
 
 
 $id = (int)($_GET['id'] ?? 0);
-if ($id <= 0) { header('Location: ../accueil.php'); exit; }
+if ($id <= 0) { header('Location: /accueil.php'); exit; }
 
 $stmt = $db->prepare("
     SELECT a.*, c.nom AS categorie, c.slug AS categorie_slug,

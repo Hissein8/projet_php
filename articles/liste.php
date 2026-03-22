@@ -4,9 +4,9 @@ require_once '../entete.php';
 require_once '../menu.php';
 
 // Vérification du rôle
-if (!isset($_SESSION['user_role']) ||
-    !in_array($_SESSION['user_role'], ['editeur', 'administrateur'])) {
-    header('Location: ../connexion.php'); exit;
+if (!isset($_SESSION['user']) || ($_SESSION['user']['role'] !== 'administrateur' && $_SESSION['user']['role'] !== 'editeur')) {
+    echo "<p class='error'>Accès refusé. Vous n'avez pas les permissions nécessaires pour accéder à cette page.</p>";
+    exit(); 
 }
 
 

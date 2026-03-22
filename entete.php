@@ -26,10 +26,10 @@ if (strpos($_SERVER['REQUEST_URI'], '/projet_php') === false) {
                 <?php include dirname(__FILE__) . '/menu.php'; ?>
             </div>
 
-            <div><i class="fa-regular fa-user"></i> 
-            <?php if (isset($_SESSION['user']['login'])) : ?> <span> Bienvenue, <strong> <?= htmlspecialchars($_SESSION['user']['login']) ?> </strong> ! </span> <button><a class="link" href="<?php echo $basePath; ?>/deconnexion.php"> Se déconnecter </a></button> <?php
-            else : ?> <button><a class="link" href="<?php echo $basePath; ?>/connexion.php"> Se connecter </a></button> <?php endif; ?>
-            </div>
+            <div><i class="fa-regular fa-user"> 
+            <?php if (isset($_SESSION['user']['login'])) : ?> <span> Bienvenue, <strong> <?= htmlspecialchars($_SESSION['user']['login']) ?> </strong> ! </span> <button><a class="nav-link" href="<?php echo $basePath; ?>/deconnexion.php"> Se déconnecter </a></button> <?php
+            else : ?> <button><a class="nav-link" href="<?php echo $basePath; ?>/connexion.php"> Se connecter </a></button> <?php endif; ?>
+            </i></div>
         </header>
         <hr>
         <script src="<?php echo $basePath; ?>/script.js"></script>

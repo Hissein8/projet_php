@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </fieldset>
         </form>
     </div>
-    <script src="/script.js"></script>
+    <script src="script.js"></script>
 
     <script>
         // Validation du formulaire de connexion

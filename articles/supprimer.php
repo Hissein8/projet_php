@@ -1,9 +1,9 @@
 <?php
 require_once '../db.php';
 
-if (!isset($_SESSION['user_role']) ||
-    !in_array($_SESSION['user_role'], ['editeur', 'administrateur'])) {
-    header('Location: ../connexion.php'); exit;
+if (!isset($_SESSION['user']) || ($_SESSION['user']['role'] !== 'administrateur' && $_SESSION['user']['role'] !== 'editeur')) {
+    echo "<p class='error'>Accès refusé. Vous n'avez pas les permissions nécessaires pour accéder à cette page.</p>";
+    exit(); 
 }
 
 // Note : session_start() est dans db.php via entete.php,
@@ -18,4 +18,4 @@ if ($id > 0) {
 }
 
 header('Location: liste.php');
-exit;
+exit();

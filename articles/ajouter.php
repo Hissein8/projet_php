@@ -1,12 +1,13 @@
 <?php
 require_once '../db.php';
 require_once '../entete.php';
-require_once '../menu.php';
 
-if (!isset($_SESSION['user_role']) ||
-    !in_array($_SESSION['user_role'], ['editeur', 'administrateur'])) {
-    header('Location: ../connexion.php'); exit;
+if (!isset($_SESSION['user']) || ($_SESSION['user']['role'] !== 'administrateur' && $_SESSION['user']['role'] !== 'editeur')) {
+    echo "<p class='error'>Accès refusé. Vous n'avez pas les permissions nécessaires pour accéder à cette page.</p>";
+    exit(); 
 }
+
+require_once '../menu.php';
 
 
 $categories = $db->query("SELECT * FROM categories ORDER BY nom")->fetchAll();
@@ -45,7 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </p>
     <?php endforeach; ?>
 
-    <form method="POST" action="" id="form-article" novalidate style="display:flex;flex-direction:column;gap:16px;">
+    <!-- <form method="POST" action="" id="form-article" novalidate style="display:flex;flex-direction:column;gap:16px;"> -->
+    <form method="POST" class="form-container" action="ajouter.php" id="form-article">
 
         <div class="form-group">
             <label for="titre">Titre *</label>

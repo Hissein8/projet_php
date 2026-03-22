@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once '../db.php';
 require_once '../entete.php';
 
@@ -16,7 +15,7 @@ require_once '../menu.php';
 
 <div class="container">
     <h2>Ajouter un utilisateur</h2>
-    <form action="ajouter.php" method="POST">
+    <form action="ajouter.php" class="form-container" method="POST">
         <div class="form-group">
             <label for="prenom">Prénom :</label>
             <input type="text" id="prenom" name="prenom" required>

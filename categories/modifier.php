@@ -14,7 +14,7 @@ require_once '../menu.php';
 
 
 if (!isset($_GET['id']) || empty($_GET['id'])) {
-    header('Location: lister.php');
+    header('Location: liste.php');
     exit;
 }
 
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!empty($nom)) {
         $stmt = $db->prepare("UPDATE categories SET nom = ? WHERE id = ?");
         $stmt->execute([$nom, $id]);
-        header('Location: lister.php');
+        header('Location: liste.php');
         exit;
     }
 } else {
@@ -36,14 +36,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $categorie = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$categorie) {
-        header('Location: lister.php');
+        header('Location: liste.php');
         exit;
     }
 }
 ?>
 
 <h2>Modifier la catégorie</h2>
-<form action="" method="POST" class="form-container">
+<form action="modifier.php?id=<?= $id ?>" method="POST" class="form-container">
     <div class="form-group">
         <label for="nom">Nom de la catégorie :</label>
         <input type="text" id="nom" name="nom" required value="<?= htmlspecialchars($categorie['nom']) ?>">

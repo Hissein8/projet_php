@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $db->prepare("INSERT INTO categories (nom) VALUES (?)");
         $stmt->execute([$nom]);
 
-        header('Location: lister.php');
+        header('Location: liste.php');
         exit();
     } else {
         echo "<p class='error'>Le nom de la catégorie ne peut pas être vide.</p>";
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 <h2>Ajouter une nouvelle catégorie</h2>
-<form action="" method="POST" class="form-container">
+<form action="ajouter.php" method="POST" class="form-container">
     <div class="form-group">
         <label for="nom">Nom de la catégorie :</label>
         <input type="text" id="nom" name="nom" required placeholder="Entrez le nom de la catégorie">

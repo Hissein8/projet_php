@@ -27,7 +27,7 @@ if (strpos($_SERVER['REQUEST_URI'], '/projet_php') === false) {
             </div>
 
             <div><i class="fa-regular fa-user"></i> 
-            <?php if (isset($_SESSION['username'])) : ?> <span> Bienvenue, <strong> <?= htmlspecialchars($_SESSION['username']) ?> </strong> ! </span> <button><a class="link" href="<?php echo $basePath; ?>/deconnexion.php"> Se déconnecter </a></button> <?php
+            <?php if (isset($_SESSION['user']['login'])) : ?> <span> Bienvenue, <strong> <?= htmlspecialchars($_SESSION['user']['login']) ?> </strong> ! </span> <button><a class="link" href="<?php echo $basePath; ?>/deconnexion.php"> Se déconnecter </a></button> <?php
             else : ?> <button><a class="link" href="<?php echo $basePath; ?>/connexion.php"> Se connecter </a></button> <?php endif; ?>
             </div>
         </header>

@@ -8,7 +8,7 @@ function authentifier($nomUtilisateur, $password, $role) {
     $stmt = $db->prepare("SELECT * FROM utilisateurs WHERE login = ? AND role = ?");
     $stmt->execute([$nomUtilisateur, $role]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($user && ($password === $user['password'])) {
+    if ($user && ($password === $user['mot_de_passe'])) {
         return $user;
     }
     return false;
@@ -16,7 +16,7 @@ function authentifier($nomUtilisateur, $password, $role) {
 
 
 if (isset($_SESSION['user']) && in_array($_SESSION['user']['role'], ['editeur', 'administrateur'])) {
-    header('Location: index.php');
+    header('Location: accueil.php');
     exit();
 }
 
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = authentifier($nomUtilisateur, $password, $role);
         if ($user) {
             $_SESSION['user'] = $user;
-            header('Location: index.php');
+            header('Location: accueil.php');
             exit();
         } else {
             $error = "Nom d'utilisateur, mot de passe ou type d'utilisateur incorrect.";
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!-- accès au type d'utilisateur $_SESSION['user']['role'] -->
 
     <div class="login-container">
-        <form action="" method="POST" class="login-form">
+        <form action="connexion.php" method="POST" class="login-form">
             <fieldset>
                 <legend><i class="fa-solid fa-lock"></i> Connexion</legend>
 

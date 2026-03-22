@@ -1,3 +1,4 @@
+.admin-link
 nav, section, footer, header, .menu-container {
     display: flex;  /* Active Flexbox */
     justify-content: space-between;  /* Distribue : gauche, centre, droite */
@@ -157,11 +158,6 @@ table th:last-child, table td:last-child {
 
 
 
-
-
-
-
-
 #links {
     display: flex;
     gap: 15px;
@@ -189,23 +185,23 @@ table th:last-child, table td:last-child {
 }
 
 /* Styles pour le menu d'administration */
-.admin-menu {
+/* .admin-menu {
     background-color: #f8f9fa;
     border: 1px solid #dee2e6;
     border-radius: 8px;
     padding: 15px;
     margin: 20px 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+} */
 
-.admin-links {
+/* .admin-links {
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
     justify-content: center;
-}
+} */
 
-.admin-link {
+/* .admin-link {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -229,21 +225,10 @@ table th:last-child, table td:last-child {
 
 .admin-link i {
     font-size: 16px;
-}
+} */
 
 /* Responsive pour le menu admin */
-@media (max-width: 768px) {
-    .admin-links {
-        flex-direction: column;
-        align-items: center;
-    }
 
-    .admin-link {
-        width: 100%;
-        max-width: 250px;
-        justify-content: center;
-    }
-}
 
 
 /* Styles pour le formulaire de connexion */
@@ -316,6 +301,7 @@ table th:last-child, table td:last-child {
     font-family: 'Courier New', monospace;
 }
 
+
 .login-btn {
     width: 70%;
     padding: 14px;
@@ -370,14 +356,20 @@ table th:last-child, table td:last-child {
 
 
 
-
-
+.admin-menu {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
 
 
 
 /* Styles pour la barre de thèmes */
-.themes-container {
+.themes-container, .admin-links {
     display: flex;  /* Flexbox pour aligner horizontalement */
     gap: 10px;     /* Espace entre les boutons */
     padding: 20px;
@@ -387,7 +379,7 @@ table th:last-child, table td:last-child {
     flex-wrap: wrap;  /* Les boutons passent à la ligne si nécessaire */
 }
 
-.theme-btn {
+.theme-btn, .admin-link {
     padding: 10px 20px;
     border: 2px solid #0c0e0f;
     background-color: white;
@@ -399,14 +391,32 @@ table th:last-child, table td:last-child {
     transition: all 0.3s ease;
 }
 
-.theme-btn:hover {
+.theme-btn:hover, .admin-link:hover {
     background-color: #e7f3ff;
     transform: translateY(-2px);
 }
 
-.theme-btn.active {
+.theme-btn.active, .admin-link.active {
     background-color: #101112;
     color: white;
+}
+
+.admin-link i {
+    margin-right: 8px;
+}
+
+
+@media (max-width: 768px) {
+    .admin-links {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .admin-link {
+        width: 100%;
+        max-width: 250px;
+        justify-content: center;
+    }
 }
 
 

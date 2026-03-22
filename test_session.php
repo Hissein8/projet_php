@@ -28,5 +28,4 @@ echo "<pre>";
 print_r($_SESSION);
 echo "</pre>";
 
-require_once 'pied.php';
 ?>

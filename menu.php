@@ -4,7 +4,7 @@
 
 <nav>
     <!-- Accueil toujours visible -->
-    <div><i class="fa-solid fa-house"></i> <a href="index.php" class="nav-link">Home</a></div>
+    <div><i class="fa-solid fa-house"></i> <a href="accueil.php" class="nav-link">Home</a></div>
 
     <!-- Menu d'administration (visible seulement pour éditeurs et admins) -->
     <?php if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'editeur') : ?>

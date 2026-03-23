@@ -78,7 +78,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </select>
     </div>
     <div class="form-group">
-        <button type="submit" class="btn btn-edit">Ajouter</button>
+        <!-- <button type="submit" class="btn btn-edit">Ajouter</button> -->
+        <button type="submit" class="btn-new">
+            <i class="fa-solid fa-plus">Ajouter</i>
+        </button>
+
         <a href="liste.php">Annuler</a>
     </div>
 </form>

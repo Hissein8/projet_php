@@ -70,6 +70,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="password" id="password" name="password" required placeholder="Entrez votre mot de passe">
                 </div>
 
+                <?php if (!empty($error)): ?>
+                    <div class="error-message" style="color:#dc3545; background:#fdf0f0; border:1px solid #dc3545; border-radius:4px; padding:10px; margin-bottom:12px;">
+                        <i class="fa-solid fa-circle-exclamation"></i> <?php echo htmlspecialchars($error); ?>
+                    </div>
+                <?php endif; ?>
                 <button type="submit" class="login-btn">
                     <i class="fa-solid fa-sign-in-alt"></i> Se connecter
                 </button>

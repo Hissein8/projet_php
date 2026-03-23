@@ -9,7 +9,7 @@ $categories = $db->query("SELECT * FROM categories")->fetchAll(PDO::FETCH_ASSOC)
 
 
 
-<a href="ajouter.php" class="btn-new">
+<a href="ajouter.php">
     <i class="fa-solid fa-plus"></i> Nouvelle catégorie
 </a>
 

@@ -99,6 +99,8 @@ table th:last-child, table td:last-child {
     margin-bottom: 16px;
     /* display: inline-block; */
     float: right;
+    /*centrer le bouton*/
+    
 }
 
 .btn-new:hover {

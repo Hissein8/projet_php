@@ -8,7 +8,7 @@ $stmt = $db->prepare($sql);
 $stmt->execute();
 $utilisateurs = $stmt->fetchAll();?>
 
-<a href="ajouter.php" class="btn-new">
+<a href="ajouter.php">
         <i class="fa-solid fa-plus"></i> Nouvel utilisateur
     </a>
 

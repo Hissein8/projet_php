@@ -6,13 +6,43 @@ require_once '../menu.php';
 $sql = "SELECT * FROM utilisateurs";
 $stmt = $db->prepare($sql);
 $stmt->execute();
-$utilisateurs = $stmt->fetchAll();
+$utilisateurs = $stmt->fetchAll();?>
 
-foreach ($utilisateurs as $user) {
-    echo "ID: " . htmlspecialchars($user['id']) . " <a href='modifier.php?id=" . $user['id'] . "'>Modifier</a> <a href='supprimer.php?id=" . $user['id'] . "'>Supprimer</a><br>";
-    echo "Nom: " . htmlspecialchars($user['nom']) . "<br>";
-    echo "Prenom: " . htmlspecialchars($user['prenom']) . "<br>";
-    echo "Login: " . htmlspecialchars($user['login']) . "<br>";
-    echo "Role: " . htmlspecialchars($user['role']) . "<br><hr>";
-}
-?>
+<a href="ajouter.php" class="btn-new">
+        <i class="fa-solid fa-plus"></i> Nouvel utilisateur
+    </a>
+
+    <h2>Liste des utilisateurs</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Login</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+
+<?php foreach ($utilisateurs as $user) {?>
+    
+    
+                <td><?php echo htmlspecialchars($user['id']); ?></td>
+                <td><?php echo htmlspecialchars($user['nom']); ?></td>
+                <td><?php echo htmlspecialchars($user['prenom']); ?></td>
+                <td><?php echo htmlspecialchars($user['login']); ?></td>
+                <td><?php echo htmlspecialchars($user['role']); ?></td>
+                <td>
+                    <a href="modifier.php?id=<?php echo $user['id']; ?>" class="btn btn-edit">Modifier</a>
+                    <a href="supprimer.php?id=<?php echo $user['id']; ?>" class="btn btn-delete">Supprimer</a>
+                </td>
+            </tr>
+        
+<?php } ?>
+
+</tbody>
+    </table>

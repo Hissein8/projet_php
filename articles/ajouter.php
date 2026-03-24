@@ -2,10 +2,12 @@
 require_once '../db.php';
 require_once '../entete.php';
 
-// if (!isset($_SESSION['username']) || ($_SESSION['username']['role'] !== 'administrateur' && $_SESSION['username']['role'] !== 'editeur')) {
-//     echo "<p class='error'>Accès refusé. Vous n'avez pas les permissions nécessaires pour accéder à cette page.</p>";
-//     exit(); 
-// }
+session_start();
+
+if (!isset($_SESSION['username']) || ($_SESSION['role'] !== 'administrateur' && $_SESSION['role'] !== 'editeur')) {
+    echo "<p class='error'>Accès refusé. Vous n'avez pas les permissions nécessaires pour accéder à cette page.</p>";
+    exit(); 
+}
 
 require_once '../menu.php';
 
@@ -25,12 +27,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (strlen($contenu) < 10) $erreurs[] = "Le contenu doit faire au moins 10 caractères.";
     if ($cat_id <= 0)           $erreurs[] = "Veuillez sélectionner une catégorie.";
 
+    print_r($erreurs);
+
     if (empty($erreurs)) {
+        echo "Bien validé côté serveur, insertion en base...";
         $stmt = $db->prepare("
             INSERT INTO articles (titre, description_courte, contenu, categorie_id, editeur_id, image_url)
             VALUES (?, ?, ?, ?, ?, ?)
         ");
-        $stmt->execute([$titre, $desc, $contenu, $cat_id, $_SESSION['user']['id'], $img_url ?: null]);
+        echo "Préparation de la requête SQL...";
+        //$stmt->execute([$titre, $desc, $contenu, $cat_id, $_SESSION['user']['id'], $img_url ?: null]);
+        $stmt->execute([$titre, $desc, $contenu, $cat_id, $_SESSION['id'], $img_url ?: null]);
+
+        echo "Article ajouté avec succès, redirection vers la liste...";
         header('Location: liste.php');
         exit;
     }
@@ -82,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- deposer un fichier image à la place de l'URL serait une amélioration future -->
      <div class="form-group">
         <label for="image_file">Image (optionnelle)</label>
-        <input type="file" id="image_file" name="image_file" accept="image/*">
+        <input type="file" id="image_file" name="image_url" accept="image/*">
     </div>
 
     <div class="form-group">

@@ -23,6 +23,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $error = "Identifiants incorrects.";
     }
+
+//     if ($user && password_verify($password, $user['mot_de_passe'])) {
+//         $_SESSION['user'] = [
+//             'id'   => $user['id'],
+//             'login' => $user['login'],
+//             'role'  => $user['role']
+//         ];
+//         header('Location: accueil.php');
+//         exit();
+//     } else {
+//         $error = "Identifiants incorrects.";
+//     }
 }
 
 // =============================================

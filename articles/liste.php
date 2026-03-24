@@ -20,6 +20,9 @@ $articles = $db->query("
     JOIN utilisateurs u ON a.editeur_id = u.id
     ORDER BY a.date_publication DESC
 ")->fetchAll(PDO::FETCH_ASSOC);
+
+
+// $articles = $db->query("SELECT * FROM articles ORDER BY date_publication DESC")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <a href="ajouter.php" class="btn-new">
@@ -47,10 +50,10 @@ $articles = $db->query("
             <td><?= htmlspecialchars($a['auteur']) ?></td>
             <td><?= date('d/m/Y', strtotime($a['date_publication'])) ?></td>
             <td>
-                <a href="modifier.php?id=<?= (int)$a['id'] ?>" class="btn btn-edit">
+                <a href="modifier.php?id=<?= (int)$a['id'] ?>" class="btn-edit">
                     <i class="fa-solid fa-pen-to-square">Modifier</i>
                 </a>
-                <a href="supprimer.php?id=<?= (int)$a['id'] ?>" class="btn btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?');">
+                <a href="supprimer.php?id=<?= (int)$a['id'] ?>" class="btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?');">
                     <i class="fa-solid fa-trash">Supprimer</i>
                 </a>
             </td>

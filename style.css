@@ -153,17 +153,6 @@ table th:last-child, table td:last-child {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
 #links {
     display: flex;
     gap: 15px;
@@ -172,12 +161,6 @@ table th:last-child, table td:last-child {
     color :rgba(0, 0, 0, 0.1);
     text-decoration: none;
 }
-
-
-
-
-
-
 
 /* Styles pour les liens de navigation */
 .nav-link {
@@ -403,11 +386,6 @@ table th:last-child, table td:last-child {
     color: white;
 }
 
-
-
-
-
-
 /* Styles pour les articles */
 .articles-container {
     display: flex;
@@ -612,4 +590,3 @@ table th:last-child, table td:last-child {
     background-color: #c82333;
     transform: translateY(-1px);
 }
-

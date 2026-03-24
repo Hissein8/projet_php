@@ -17,6 +17,7 @@ $articles = $db->query("
     JOIN utilisateurs u ON a.editeur_id = u.id
     ORDER BY a.date_publication DESC
 ")->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <input type="text" id="search-input" placeholder="Rechercher par titre ou catégorie...">

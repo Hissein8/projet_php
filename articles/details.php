@@ -5,7 +5,10 @@ require_once '../menu.php';
 
 
 $id = (int)($_GET['id'] ?? 0);
-if ($id <= 0) { header('Location: ../accueil.php'); exit; }
+if ($id <= 0) {
+    header('Location: ../accueil.php');
+    exit;
+}
 
 $stmt = $db->prepare("
     SELECT a.*, c.nom AS categorie,
@@ -15,10 +18,15 @@ $stmt = $db->prepare("
     JOIN utilisateurs u ON a.editeur_id = u.id
     WHERE a.id = ?
 ");
+
+
 $stmt->execute([$id]);
 $article = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if (!$article) { header('Location: /accueil.php'); exit; }
+if (!$article) {
+    header('Location: ../accueil.php');
+    exit;
+}
 ?>
 
 <div class="detail-container">
@@ -29,8 +37,10 @@ if (!$article) { header('Location: /accueil.php'); exit; }
         </a>
     </p>
 
-    <?php if ($article['image_url']): ?>
-    <img src="<?= htmlspecialchars($article['image_url']) ?>" alt="<?= htmlspecialchars($article['titre']) ?>" class="detail-image">
+    <?php if (!empty($article['image_file'])): ?>
+        <img src="<?= htmlspecialchars($article['image_file']) ?>" class="detail-image">
+    <?php elseif (!empty($article['image_url'])): ?>
+        <img src="<?= htmlspecialchars($article['image_url']) ?>" class="detail-image">
     <?php endif; ?>
 
     <h1><?= htmlspecialchars($article['titre']) ?></h1>
@@ -47,14 +57,15 @@ if (!$article) { header('Location: /accueil.php'); exit; }
         <?= nl2br(htmlspecialchars($article['contenu'])) ?>
     </div>
 
-    <?php if (isset($_SESSION['user']) && in_array($_SESSION['user']['role'], ['editeur', 'administrateur'])): ?>
-    <div class="detail-actions">
-        <a href="modifier.php?id=<?= (int)$article['id'] ?>" class="btn btn-edit">Modifier</a>
-        <a href="supprimer.php?id=<?= (int)$article['id'] ?>" class="btn btn-delete"
-            onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?')">Supprimer</a>
-    </div>
+    <?php if (isset($_SESSION['username']) && in_array($_SESSION['role'], ['editeur', 'administrateur'])): ?>
+        <div class="detail-actions">
+            <a href="modifier.php?id=<?= (int)$article['id'] ?>" class="btn btn-edit">Modifier</a>
+            <a href="supprimer.php?id=<?= (int)$article['id'] ?>" class="btn btn-delete"
+                onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?')">Supprimer</a>
+        </div>
     <?php endif; ?>
 </div>
 
 </body>
+
 </html>

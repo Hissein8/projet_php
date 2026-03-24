@@ -1,4 +1,4 @@
-.admin-link
+
 nav, section, footer, header, .menu-container {
     display: flex;  /* Active Flexbox */
     justify-content: space-between;  /* Distribue : gauche, centre, droite */
@@ -368,18 +368,24 @@ table th:last-child, table td:last-child {
 
 
 
-/* Styles pour la barre de thèmes */
-.themes-container, .admin-links {
-    display: flex;  /* Flexbox pour aligner horizontalement */
-    gap: 10px;     /* Espace entre les boutons */
+/* .themes-container, .admin-links {
+    display: flex;  
+    gap: 10px;     
     padding: 20px;
-    /* justify-content: space-between; */
     background-color: #f5f5f5;
     border-bottom: 2px solid #0c0b0b;
-    flex-wrap: wrap;  /* Les boutons passent à la ligne si nécessaire */
+    flex-wrap: wrap;
+} */
+.themes-container, .admin-links {
+    display: flex;  
+    gap: 10px;     
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-bottom: 2px solid #0c0b0b;
+    flex-wrap: wrap;
 }
 
-.theme-btn, .admin-link {
+/* .theme-btn, .admin-link {
     padding: 10px 20px;
     border: 2px solid #0c0e0f;
     background-color: white;
@@ -389,16 +395,40 @@ table th:last-child, table td:last-child {
     font-size: 12px;
     font-weight: 600;
     transition: all 0.3s ease;
+} */
+
+.theme-btn, .admin-link {
+    padding: 10px 20px;
+    border: 1px solid #e5e7eb;
+    background-color: white;
+    color: #111;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
 }
 
-.theme-btn:hover, .admin-link:hover {
+/* .theme-btn:hover, .admin-link:hover {
     background-color: #e7f3ff;
+    transform: translateY(-2px);
+} */
+
+.theme-btn:hover, .admin-link:hover {
+    background-color: #333;
+    color: white;
     transform: translateY(-2px);
 }
 
-.theme-btn.active, .admin-link.active {
+/* .theme-btn.active, .admin-link.active {
     background-color: #101112;
     color: white;
+} */
+
+.theme-btn.active, .admin-link.active {
+    background-color: #111;
+    color: white;
+    border-color: #111;
 }
 
 .admin-link i {

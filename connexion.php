@@ -3,10 +3,13 @@ require_once 'db.php';
 require_once 'entete.php';
 
 
-function authentifier($nomUtilisateur, $password, $role) {
+// function authentifier($nomUtilisateur, $password, $role) {
+    function authentifier($nomUtilisateur, $password) {
     global $db;
-    $stmt = $db->prepare("SELECT * FROM utilisateurs WHERE login = ? AND role = ?");
-    $stmt->execute([$nomUtilisateur, $role]);
+    // $stmt = $db->prepare("SELECT * FROM utilisateurs WHERE login = ? AND role = ?");
+    // $stmt->execute([$nomUtilisateur, $role]);
+    $stmt = $db->prepare("SELECT * FROM utilisateurs WHERE login = ?");
+    $stmt->execute([$nomUtilisateur]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($user && ($password === $user['mot_de_passe'])) {
         return $user;
@@ -24,18 +27,18 @@ if (isset($_SESSION['user']) && in_array($_SESSION['user']['role'], ['editeur', 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nomUtilisateur = trim($_POST['username'] ?? '');
     $password = $_POST['password'] ?? '';
-    $role = $_POST['usertype'] ?? '';
+    // $role = $_POST['usertype'] ?? '';
 
-    if (empty($nomUtilisateur) || empty($password) || empty($role)) {
+    if (empty($nomUtilisateur) || empty($password)) {
         $error = "Tous les champs sont obligatoires.";
     } else {
-        $user = authentifier($nomUtilisateur, $password, $role);
+        $user = authentifier($nomUtilisateur, $password);
         if ($user) {
             $_SESSION['user'] = $user;
             header('Location: accueil.php');
             exit();
         } else {
-            $error = "Nom d'utilisateur, mot de passe ou type d'utilisateur incorrect.";
+            $error = "Nom d'utilisateur ou mot de passe incorrect.";
         }
     }
 }
@@ -48,16 +51,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <fieldset>
                 <legend><i class="fa-solid fa-lock"></i> Connexion</legend>
 
-                <div class="form-group">
+                <!-- <div class="form-group"> -->
                     <!-- <label for="usertype"><i class="fa-solid fa-user-tag"></i> Type d'utilisateur :</label> -->
-                    <label for="usertype"> Type d'utilisateur :</label>
-                    <select name="usertype" id="usertype" required>
-                        <option value="">Sélectionnez un type</option>
-                        <!-- <option value="visiteur">Visiteur</option> -->
-                        <option value="editeur">Éditeur</option>
-                        <option value="administrateur">Administrateur</option>
-                    </select>
-                </div>
+                    <!-- <label for="usertype"> Type d'utilisateur :</label> -->
+                    <!-- <select name="usertype" id="usertype" required> -->
+                        <!-- <option value="">Sélectionnez un type</option> -->
+                        <!-- <option value="editeur">Éditeur</option> -->
+                        <!-- <option value="administrateur">Administrateur</option> -->
+                    <!-- </select> -->
+                <!-- </div> -->
                 <div class="form-group">
                     <!-- <label for="username"><i class="fa-solid fa-user"></i> Nom d'utilisateur :</label> -->
                     <label for="username"> Nom d'utilisateur :</label>

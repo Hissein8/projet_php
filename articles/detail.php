@@ -5,20 +5,30 @@ require_once '../menu.php';
 
 
 $id = (int)($_GET['id'] ?? 0);
-if ($id <= 0) { header('Location: /accueil.php'); exit; }
+if ($id <= 0) { header('Location: ../accueil.php'); exit; }
 
-$stmt = $db->prepare("
-    SELECT a.*, c.nom AS categorie,
-           CONCAT(u.prenom, ' ', u.nom) AS auteur
-    FROM articles a
-    JOIN categories c ON a.categorie_id = c.id
-    JOIN utilisateurs u ON a.editeur_id = u.id
-    WHERE a.id = ?
-");
+
+
+$stmt = $db->prepare("SELECT * FROM articles WHERE id = ?");
 $stmt->execute([$id]);
 $article = $stmt->fetch(PDO::FETCH_ASSOC);
+if (!$article) { header('Location: ../accueil.php'); exit; }
 
-if (!$article) { header('Location: /accueil.php'); exit; }
+
+
+
+// $stmt = $db->prepare("
+//     SELECT a.*, c.nom AS categorie,
+//            CONCAT(u.prenom, ' ', u.nom) AS auteur
+//     FROM articles a
+//     JOIN categories c ON a.categorie_id = c.id
+//     JOIN utilisateurs u ON a.editeur_id = u.id
+//     WHERE a.id = ?
+// ");
+// $stmt->execute([$id]);
+// $article = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// if (!$article) { header('Location: /accueil.php'); exit; }
 ?>
 
 <div class="detail-container">

@@ -5,7 +5,7 @@ require_once 'db.php';
 
 ?>
 
-    <div class="themes-container">
+    <!-- <div class="themes-container">
         <button class="theme-btn active" data-theme="all">Tous</button>
         <button class="theme-btn" data-theme="sport">Sport</button>
         <button class="theme-btn" data-theme="sante">Santé</button>
@@ -15,7 +15,7 @@ require_once 'db.php';
         <button class="theme-btn" data-theme="politique">Politique</button>
         <button class="theme-btn" data-theme="Éducation">Education</button>
 
-    </div>
+    </div> -->
 
     <!-- Articles
         <section class="articles-container">
@@ -62,32 +62,39 @@ require_once 'db.php';
         </article>
 
     </section> -->
-
-    <!-- Les articles seront chargés dynamiquement via JavaScript  et recuperer depuis la base de données -->
-    <?php
-    $sql = "SELECT a.id, a.titre, a.description_courte, a.contenu, a.image_url, a.date_publication,
-            c.nom AS categorie,
-            CONCAT(u.prenom, ' ', u.nom) AS auteur
-        FROM articles a
-        JOIN categories c ON a.categorie_id = c.id
-        JOIN utilisateurs u ON a.editeur_id = u.id
-        ORDER BY a.date_publication DESC";
-    $articles = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($articles as $article) {
-        // Affichage de chaque article
-        // Utiliser htmlspecialchars pour éviter les problèmes de sécurité XSS
-        echo '<article class="article" data-category="' . htmlspecialchars($article['categorie']) . '">';
-        if ($article['image_url']) {
-            echo '<img src="' . htmlspecialchars($article['image_url']) . '" alt="' . htmlspecialchars($article['titre']) . '">';
+    <!-- afficher les articles de la base de données de façon dynamique -->
+     <!-- afficher des boutons de filtrage par catégorie -->
+    <div class="filter-container">
+        <button class="filter-btn active" data-filter="all">Tous</button>
+        <?php
+        $categories = $db->query("SELECT id, nom FROM categories ORDER BY nom")->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($categories as $cat) {
+            echo '<button class="filter-btn" data-filter="' . htmlspecialchars($cat['nom']) . '">' . htmlspecialchars($cat['nom']) . '</button>';
         }
-        echo '<h3>' . htmlspecialchars($article['titre']) . '</h3>';
-        echo '<p class="category-badge">' . htmlspecialchars($article['categorie']) . '</p>';
-        echo '<p>' . nl2br(htmlspecialchars($article['description_courte'])) . '</p>';
-        echo '<small>Publié le ' . date('d/m/Y', strtotime($article['date_publication'])) . '</small>';
-        echo '</article>';
-    }
-    ?>
+        ?>
 
+
+    <div class="articles-container">
+        <?php
+        $articles = $db->query("
+            SELECT a.id, a.titre, a.date_publication,
+                   c.nom AS categorie,
+                   CONCAT(u.prenom, ' ', u.nom) AS auteur
+            FROM articles a
+            JOIN categories c ON a.categorie_id = c.id
+            JOIN utilisateurs u ON a.editeur_id = u.id
+            ORDER BY a.date_publication DESC
+        ")->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($articles as $a) {
+            echo '<article class="article" data-category="' . htmlspecialchars($a['categorie']) . '">';
+            echo '<h3><a href="articles/detail.php?id=' . (int)$a['id'] . '">' . htmlspecialchars($a['titre']) . '</a></h3>';
+            echo '<p class="category-badge">' . htmlspecialchars($a['categorie']) . '</p>';
+            echo '<p>Par ' . htmlspecialchars($a['auteur']) . '</p>';
+            echo '<small>Publié le ' . date('d/m/Y', strtotime($a['date_publication'])) . '</small>';
+            echo '</article>';
+        }
+        ?>
     <script src="script.js"></script>
 </body>
 </html>

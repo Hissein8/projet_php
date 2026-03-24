@@ -3,6 +3,12 @@ require_once '../db.php';
 require_once '../entete.php';
 require_once '../menu.php';
 
+// // Vérification du rôle
+// if (!isset($_SESSION['username']) || ($_SESSION['username']['role'] !== 'administrateur' && $_SESSION['username']['role'] !== 'editeur')) {
+//     echo "<p class='error'>Accès refusé. Vous n'avez pas les permissions nécessaires pour accéder à cette page.</p>";
+//     exit(); 
+// }
+
 $sql = "SELECT * FROM utilisateurs";
 $stmt = $db->prepare($sql);
 $stmt->execute();

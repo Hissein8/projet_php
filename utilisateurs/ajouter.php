@@ -1,6 +1,7 @@
 <?php
 require_once '../db.php';
 require_once '../entete.php';
+
 require_once '../menu.php';
 ?>
 

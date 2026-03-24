@@ -47,8 +47,10 @@ $utilisateurs = $stmt->fetchAll();?>
                 <td><?php echo htmlspecialchars($user['login']); ?></td>
                 <td><?php echo htmlspecialchars($user['role']); ?></td>
                 <td>
-                    <a href="modifier.php?id=<?php echo $user['id']; ?>" class="btn btn-edit">Modifier</a>
-                    <a href="supprimer.php?id=<?php echo $user['id']; ?>" class="btn btn-delete">Supprimer</a>
+                    <a href="modifier.php?id=<?php echo $user['id']; ?>" class="btn btn-edit">
+                        <i class="fa-solid fa-pen-to-square">Modifier</i>
+                    </a> 
+                    <a href="supprimer.php?id=<?php echo $user['id']; ?>" class="btn btn-delete"><i class="fa-solid fa-trash">Supprimer</i></a>
                 </td>
             </tr>
         

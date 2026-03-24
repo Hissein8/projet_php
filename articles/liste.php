@@ -40,7 +40,7 @@ $articles = $db->query("
         <?php foreach ($articles as $a) : ?>
         <tr>
             <td>
-                <!--<a href="detail.php?id=<?= (int)$a['id'] ?>"><?= htmlspecialchars($a['titre']) ?></a>-->
+                <a href="detail.php?id=<?= (int)$a['id'] ?>"><?= htmlspecialchars($a['titre']) ?></a>
             </td>
             <td><?= htmlspecialchars($a['categorie']) ?></td>
             <td><?= htmlspecialchars($a['auteur']) ?></td>

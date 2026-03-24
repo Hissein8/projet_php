@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $contenu = trim($_POST['contenu'] ?? '');
     $cat_id  = (int)($_POST['categorie_id'] ?? 0);
     $img_url = trim($_POST['image_url'] ?? '');
+    $img_file = $_FILES['image_file'] ?? null;
 
     // Validation PHP
     if (strlen($titre) < 3)    $erreurs[] = "Le titre doit faire au moins 3 caractères.";
@@ -32,12 +33,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($erreurs)) {
         echo "Bien validé côté serveur, insertion en base...";
         $stmt = $db->prepare("
-            INSERT INTO articles (titre, description_courte, contenu, categorie_id, editeur_id, image_url)
-            VALUES (?, ?, ?, ?, ?, ?)
+            INSERT INTO articles (titre, description_courte, contenu, categorie_id, editeur_id, image_url, image_file)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
         ");
         echo "Préparation de la requête SQL...";
-        //$stmt->execute([$titre, $desc, $contenu, $cat_id, $_SESSION['user']['id'], $img_url ?: null]);
-        $stmt->execute([$titre, $desc, $contenu, $cat_id, $_SESSION['id'], $img_url ?: null]);
+        
+        $stmt->execute([$titre, $desc, $contenu, $cat_id, $_SESSION['id'], $img_url ?: null, $img_file ?: null]);
 
         echo "Article ajouté avec succès, redirection vers la liste...";
         header('Location: liste.php');
@@ -91,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- deposer un fichier image à la place de l'URL serait une amélioration future -->
      <div class="form-group">
         <label for="image_file">Image (optionnelle)</label>
-        <input type="file" id="image_file" name="image_url" accept="image/*">
+        <input type="file" id="image_file" name="image_file" accept="image/*">
     </div>
 
     <div class="form-group">

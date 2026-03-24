@@ -51,6 +51,7 @@ CREATE TABLE IF NOT EXISTS articles (
     categorie_id       INT NOT NULL,
     editeur_id         INT NOT NULL,
     image_url          VARCHAR(255),
+    image_file         VARCHAR(255),
     date_publication   DATETIME DEFAULT CURRENT_TIMESTAMP,
 
     FOREIGN KEY (categorie_id) REFERENCES categories(id) ON DELETE CASCADE,

@@ -37,10 +37,10 @@ $categories = $db->query("SELECT * FROM categories")->fetchAll(PDO::FETCH_ASSOC)
             <td><?= htmlspecialchars($categorie['id']) ?></td>
             <td><?= htmlspecialchars($categorie['nom']) ?></td>
             <td>
-                <a href="modifier.php?id=<?= $categorie['id'] ?>" class="btn btn-edit">
+                <a href="modifier.php?id=<?= $categorie['id'] ?>" class="btn-edit">
                     <i class="fa-solid fa-pen-to-square">Modifier</i> 
                 </a>
-                <a href="supprimer.php?id=<?= $categorie['id'] ?>" class="btn btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?');">
+                <a href="supprimer.php?id=<?= $categorie['id'] ?>" class="btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?');">
                     <i class="fa-solid fa-trash">Supprimer</i> 
                 </a>
             </td>

@@ -46,6 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="nom">Nom de la catégorie :</label>
         <input type="text" id="nom" name="nom" required placeholder="Entrez le nom de la catégorie">
     </div>
+    <a href="liste.php" class="btn-cancel">
+            <i class="fa-solid fa-xmark">Annuler</i>
+    </a>
     <button type="submit" class="btn-new">
         <i class="fa-solid fa-plus">Ajouter</i> 
     </button>

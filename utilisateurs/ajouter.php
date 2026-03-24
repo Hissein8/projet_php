@@ -77,14 +77,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <option value="administrateur" <?= (($_POST['role'] ?? '') === 'administrateur') ? 'selected' : '' ?>>Administrateur</option>
         </select>
     </div>
-    <div class="form-group">
+    <!-- <div class="form-group"> -->
         <!-- <button type="submit" class="btn btn-edit">Ajouter</button> -->
         <button type="submit" class="btn-new">
             <i class="fa-solid fa-plus">Ajouter</i>
         </button>
 
-        <a href="liste.php">Annuler</a>
-    </div>
+        <a href="liste.php" class="btn-cancel">
+            <i class="fa-solid fa-xmark">Annuler</i>
+        </a>
+    <!-- </div> -->
+
+        <!-- <a href="liste.php" class="btn-cancel">
+            <i class="fa-solid fa-xmark">Annuler</i>
+        </a> -->
+    <!-- </div> -->
 </form>
 
 </body>

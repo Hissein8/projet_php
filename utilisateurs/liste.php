@@ -14,6 +14,10 @@ $stmt = $db->prepare($sql);
 $stmt->execute();
 $utilisateurs = $stmt->fetchAll();?>
 
+<!-- barre de recherche et le placer a droite de la page-->
+<input type="text" id="search-input" placeholder="Rechercher par nom ou prénom...">
+
+
 <a href="ajouter.php">
         <i class="fa-solid fa-plus"></i> Nouvel utilisateur
     </a>
@@ -52,3 +56,21 @@ $utilisateurs = $stmt->fetchAll();?>
 
 </tbody>
     </table>
+
+    <script>
+        // barre de recherche
+        const searchInput = document.getElementById('search-input');
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            const rows = document.querySelectorAll('table tbody tr');
+            rows.forEach(row => {
+                const nom = row.cells[1].textContent.toLowerCase();
+                const prenom = row.cells[2].textContent.toLowerCase();
+                if (nom.includes(query) || prenom.includes(query)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>

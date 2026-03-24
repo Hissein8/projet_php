@@ -7,6 +7,7 @@ require_once '../db.php';
 $categories = $db->query("SELECT * FROM categories")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
+<input type="text" id="search-input" placeholder="Rechercher par catégorie...">
 
 
 <a href="ajouter.php">
@@ -42,3 +43,21 @@ $categories = $db->query("SELECT * FROM categories")->fetchAll(PDO::FETCH_ASSOC)
 
         </body>
         </html>
+
+         <script>
+        // barre de recherche
+        const searchInput = document.getElementById('search-input');
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            const rows = document.querySelectorAll('table tbody tr');
+            rows.forEach(row => {
+                const nom = row.cells[1].textContent.toLowerCase();
+                const prenom = row.cells[2].textContent.toLowerCase();
+                if (nom.includes(query) || prenom.includes(query)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>

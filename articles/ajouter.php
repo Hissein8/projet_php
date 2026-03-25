@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Dossier de destination
             // $upload_dir  = __DIR__ . '/projet_php/articles/uploads/';
-            $upload_dir  = __DIR__ . '/projet_php/articles/uploads/';
+            $upload_dir  = BASE_PATH . '/articles/uploads/';
             $target_path = $upload_dir . $filename;
 
             // Création du dossier si inexistant
@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Déplacement sécurisé
             if (move_uploaded_file($file['tmp_name'], $target_path)) {
-                $image_path = 'uploads/' . $filename;
+                $image_path = BASE_URL . '/articles/uploads/' . $filename;
             } else {
                 $erreurs[] = "Erreur lors de l'enregistrement de l'image. Vérifiez les permissions du dossier uploads/.";
             }

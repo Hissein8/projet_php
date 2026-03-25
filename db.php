@@ -5,7 +5,7 @@ require_once __DIR__ . '/config.php';
 // define('BASE_URL', '/' . basename(__DIR__));
 
 // Chemin serveur absolu (pour move_uploaded_file)
-define('BASE_PATH', dirname(__DIR__)); 
+define('BASE_PATH', __DIR__); 
 // // pointe vers projet_php/
 
 // URL publique (pour afficher les images dans le navigateur)

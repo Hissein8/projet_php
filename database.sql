@@ -73,6 +73,7 @@ INSERT INTO categories (nom) VALUES
 -- admin     → mot de passe : admin123
 -- editeur1  → mot de passe : edit123
 INSERT INTO utilisateurs (nom, prenom, login, mot_de_passe, role) VALUES
+-- Hashage des mots de passe avec bcrypt (PHP password_hash)
 ('Diop', 'Amadou', 'diopamadou','password1','administrateur'),
 ('Fall', 'Fatou', 'fallfatou','password2','editeur'),
 ('Ba', 'Mamadou', 'bamamadou','password3','editeur');

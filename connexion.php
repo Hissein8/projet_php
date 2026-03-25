@@ -11,7 +11,7 @@ require_once 'entete.php';
     $stmt = $db->prepare("SELECT * FROM utilisateurs WHERE login = ?");
     $stmt->execute([$nomUtilisateur]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($user && ($password === $user['mot_de_passe'])) {
+    if ($user && (password_verify($password, $user['mot_de_passe']))) {
         return $user;
     }
     return false;

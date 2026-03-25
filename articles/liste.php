@@ -45,6 +45,11 @@ $articles = $db->query("
         <tr>
             <td>
                 <a href="detail.php?id=<?= (int)$a['id'] ?>"><?= htmlspecialchars($a['titre']) ?></a>
+                <!-- afficher l'image de l'article  qui se trouve dans le dossier uploads -->
+                <?php if (!empty($a['image_url'])): ?>
+                    <br>
+                    <img src="../uploads/<?= htmlspecialchars($a['image_url']) ?>" alt="Image de l'article" class="article-image">
+                <?php endif; ?>
             </td>
             <td><?= htmlspecialchars($a['categorie']) ?></td>
             <td><?= htmlspecialchars($a['auteur']) ?></td>

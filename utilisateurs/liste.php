@@ -13,6 +13,9 @@ require_once '../menu.php';
 $utilisateurs = $db->query("SELECT * FROM utilisateurs ORDER BY nom")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
+<!-- Recherche par nom -->
+<input type="text" id="search" placeholder="Rechercher par nom..." class="search
+
 <a href="ajouter.php" class="btn-new">
     <i class="fa-solid fa-plus"></i> Nouvel utilisateur
 </a>
@@ -52,3 +55,21 @@ $utilisateurs = $db->query("SELECT * FROM utilisateurs ORDER BY nom")->fetchAll(
 
 </body>
 </html>
+
+<script>
+// Fonction de recherche en temps réel
+document.getElementById('search').addEventListener('input', function() {
+    const searchTerm = this.value.toLowerCase();
+    const rows = document.querySelectorAll('table tbody tr');
+    rows.forEach(row => {
+        const nom = row.cells[1].textContent.toLowerCase();
+        const prenom = row.cells[2].textContent.toLowerCase();
+        if (nom.includes(searchTerm) || prenom.includes(searchTerm)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    
+    });
+});
+</script>

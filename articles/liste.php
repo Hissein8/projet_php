@@ -24,6 +24,8 @@ $articles = $db->query("
 
 // $articles = $db->query("SELECT * FROM articles ORDER BY date_publication DESC")->fetchAll(PDO::FETCH_ASSOC);
 ?>
+<!-- Recherche par titre -->
+<input type="text" id="search" placeholder="Rechercher par titre..." class="search-input">
 
 <a href="ajouter.php" class="btn-new">
     <i class="fa-solid fa-plus"></i> Nouvel article
@@ -69,3 +71,20 @@ $articles = $db->query("
 
 </body>
 </html>
+
+<script>
+    // barre de recherche pour filtrer les articles par titre
+    const searchInput = document.querySelector('#search');
+    searchInput.addEventListener('input', function() {
+        const query = this.value.toLowerCase();
+        const rows = document.querySelectorAll('table tbody tr');
+        rows.forEach(row => {
+            const title = row.querySelector('td:first-child a').textContent.toLowerCase();
+            if (title.includes(query)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+</script>

@@ -3,17 +3,16 @@ require_once 'db.php';
 require_once 'entete.php';
 
 
-// function authentifier($nomUtilisateur, $password, $role) {
     function authentifier($nomUtilisateur, $password) {
     global $db;
-    // $stmt = $db->prepare("SELECT * FROM utilisateurs WHERE login = ? AND role = ?");
-    // $stmt->execute([$nomUtilisateur, $role]);
     $stmt = $db->prepare("SELECT * FROM utilisateurs WHERE login = ?");
     $stmt->execute([$nomUtilisateur]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($user && ($password === $user['mot_de_passe'])) {
+    // if ($user && ($password === $user['mot_de_passe'])) {
+    if ($user && password_verify($password, $user['mot_de_passe'])) {
         return $user;
     }
+    
     return false;
 }
 
@@ -44,30 +43,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<!-- accès au type d'utilisateur $_SESSION['user']['role'] -->
 
     <div class="login-container">
         <form action="connexion.php" method="POST" class="login-form">
             <fieldset>
                 <legend><i class="fa-solid fa-lock"></i> Connexion</legend>
-
-                <!-- <div class="form-group"> -->
-                    <!-- <label for="usertype"><i class="fa-solid fa-user-tag"></i> Type d'utilisateur :</label> -->
-                    <!-- <label for="usertype"> Type d'utilisateur :</label> -->
-                    <!-- <select name="usertype" id="usertype" required> -->
-                        <!-- <option value="">Sélectionnez un type</option> -->
-                        <!-- <option value="editeur">Éditeur</option> -->
-                        <!-- <option value="administrateur">Administrateur</option> -->
-                    <!-- </select> -->
-                <!-- </div> -->
                 <div class="form-group">
-                    <!-- <label for="username"><i class="fa-solid fa-user"></i> Nom d'utilisateur :</label> -->
                     <label for="username"> Nom d'utilisateur :</label>
                     <input type="text" id="username" name="username" required placeholder="Entrez votre nom d'utilisateur">
                 </div>
 
                 <div class="form-group">
-                    <!-- <label for="password"><i class="fa-solid fa-key"></i> Mot de passe :</label> -->
                     <label for="password"> Mot de passe :</label>
                     <input type="password" id="password" name="password" required placeholder="Entrez votre mot de passe">
                 </div>
@@ -86,7 +72,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="script.js"></script>
 
     <script>
-        // Validation du formulaire de connexion
         document.querySelector('.login-form').addEventListener('submit', function(e) {
             const username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value;
@@ -94,7 +79,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             let isValid = true;
             let errorMessage = '';
 
-            // Validation du nom d'utilisateur (au moins 2 caractères)
             if (username.length < 2) {
                 isValid = false;
                 errorMessage += 'Le nom d\'utilisateur doit contenir au moins 2 caractères.\n';
@@ -103,7 +87,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 document.getElementById('username').style.borderColor = '#28a745';
             }
 
-            // Validation du mot de passe (au moins 3 caractères)
             if (password.length < 3) {
                 isValid = false;
                 errorMessage += 'Le mot de passe doit contenir au moins 3 caractères.\n';
@@ -112,14 +95,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 document.getElementById('password').style.borderColor = '#28a745';
             }
 
-            // Si validation échoue, empêcher la soumission et afficher l'erreur
             if (!isValid) {
                 e.preventDefault();
                 alert(errorMessage);
             }
         });
 
-        // Réinitialiser la couleur des bordures lors de la saisie
         document.getElementById('username').addEventListener('input', function() {
             this.style.borderColor = '#ddd';
         });

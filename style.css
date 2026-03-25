@@ -1,8 +1,8 @@
 
 nav, section, footer, header, .menu-container {
-    display: flex;  /* Active Flexbox */
-    justify-content: space-between;  /* Distribue : gauche, centre, droite */
-    align-items: center;  /* Centre verticalement (optionnel, pour l'alignement vertical) */
+    display: flex;
+    justify-content: space-between;  
+    align-items: center;
 }
 
 nav div, th, header div {
@@ -10,9 +10,9 @@ nav div, th, header div {
 }
 
 hr  {
-    border: none;  /* Supprime la bordure par défaut */
-    border-top: 1px solid #ccc;  /* Ajoute une ligne horizontale */
-    margin: 20px 0;  /* Espace au-dessus et en dessous de la ligne */
+    border: none;  
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
 }
 
 
@@ -298,12 +298,6 @@ table th:last-child, table td:last-child {
 }
 
 
-/* .theme-filters, .admin-links {
-    display: flex;
-    gap: 10px;
-    padding: 20px;
-    flex-wrap : wrap;
-} */
 
 
 .themes-filters, .admin-links {
@@ -361,49 +355,6 @@ table th:last-child, table td:last-child {
 }
 
 
-/* .theme-filters {
-    display: flex;
-    gap: 10px;
-    padding: 20px;
-    flex-wrap: wrap;
-}
-
-.theme-btn {
-    padding: 8px 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background: white;
-    cursor: pointer;
-}
-
-.theme-btn.actif {
-    background: black;
-    color: white;
-    border-color: black;
-}
-
-.theme-btn:hover {
-    background: #333;
-    color: white;
-    border-color: #333;
-}
-
-
-@media (max-width: 768px) {
-    .theme-filters {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .theme-btn {
-        width: 100%;
-        max-width: 250px;
-        justify-content: center;
-    }
-} */
-
-
-
 /* ===== PAGE DÉTAIL ARTICLE ===== */
 
 .detail-container {
@@ -437,14 +388,12 @@ table th:last-child, table td:last-child {
     color: #888;
 }
 
-/* Ligne de séparation */
 .detail-hr {
     border: none;
     border-top: 1px solid #ddd;
     margin: 20px 0;
 }
 
-/* Image principale */
 .detail-image {
     width: 100%;
     max-height: 480px;
@@ -453,7 +402,6 @@ table th:last-child, table td:last-child {
     margin-bottom: 30px;
 }
 
-/* Contenu de l'article */
 .detail-contenu {
     font-size: 1.05rem;
     line-height: 1.8;
@@ -461,7 +409,7 @@ table th:last-child, table td:last-child {
     font-family: Georgia, serif;
 }
 
-/* Boutons modifier / supprimer */
+
 .detail-actions {
     display: flex;
     gap: 12px;
@@ -470,7 +418,7 @@ table th:last-child, table td:last-child {
     border-top: 1px solid #eee;
 }
 
-/* Lien retour */
+
 .detail-retour {
     margin-top: 40px;
     font-size: 0.9rem;
@@ -492,11 +440,6 @@ table th:last-child, table td:last-child {
 
 
 
-
-
-
-/* Styles pour les articles */
-
 .articles-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -514,87 +457,5 @@ table th:last-child, table td:last-child {
 .article-image {
     width: 100%;
     height: 250px;
-    object-fit: cover; /* important pour que l'image soit bien cadrée */
+    object-fit: cover; 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-/* .articles-container {
-display: flex;
-flex-direction: column; 
-    gap: 20px;
-    padding: 20px;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.article {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-}
-
-.article:hover {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transform: translateY(-3px);
-}
-
-.article h3 {
-    margin: 0 0 10px 0;
-    color: #333;
-    font-size: 20px;
-}
-
-.article p {
-    color: #666;
-    line-height: 1.6;
-    margin: 10px 0;
-}
-
-.category-badge {
-    display: inline-block;
-    background-color: #007bff;
-    color: white;
-    padding: 5px 12px;
-    border-radius: 15px;
-    font-size: 12px;
-    font-weight: bold;
-    margin-bottom: 10px !important;
-}
-
-.article small {
-    color: #999;
-    font-size: 12px;
-}
-
-.article {
-    animation: fadeIn 0.4s ease;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.article.hidden {
-    display: none;
-}
- */

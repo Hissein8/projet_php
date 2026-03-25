@@ -79,8 +79,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             value="<?= htmlspecialchars($_POST['image_url'] ?? '') ?>">
     </div>
 
-    <!-- <div class="form-group"> -->
-        <!-- <button type="submit" class="btn btn-edit">Publier</button> -->
         <button type="submit" class="btn-new">
             <i class="fa-solid fa-plus">Publier</i>
         </button>

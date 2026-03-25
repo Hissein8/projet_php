@@ -13,6 +13,10 @@ require_once '../menu.php';
 $utilisateurs = $db->query("SELECT * FROM utilisateurs ORDER BY nom")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
+<!-- /* Barre de recherche (optionnelle) */ -->
+<input type="text" id="searchInput" placeholder="Rechercher un utilisateur..." class="search-input">
+
+
 <a href="ajouter.php" class="btn-new">
     <i class="fa-solid fa-plus"></i> Nouvel utilisateur
 </a>
@@ -49,6 +53,24 @@ $utilisateurs = $db->query("SELECT * FROM utilisateurs ORDER BY nom")->fetchAll(
         <?php endforeach; ?>
     </tbody>
 </table>
+
+
+<script>
+    // barre de recherche (optionnelle)
+    document.getElementById('searchInput').addEventListener('input', function() {
+        const query = this.value.toLowerCase();
+        document.querySelectorAll('table tbody tr').forEach(function(row) {
+            const nom = row.children[1].textContent.toLowerCase();
+            const prenom = row.children[2].textContent.toLowerCase();
+            const login = row.children[3].textContent.toLowerCase();
+            if (nom.includes(query) || prenom.includes(query) || login.includes(query)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+</script>
 
 </body>
 </html>

@@ -17,6 +17,9 @@ $categories = $db->query("SELECT * FROM categories")->fetchAll(PDO::FETCH_ASSOC)
 ?>
 
 
+<!-- // Barre de recherche (optionnelle) -->
+<input type="text" id="searchInput" placeholder="Rechercher une catégorie..." class="search-input">
+
 
 <a href="ajouter.php" class="btn-new">
     <i class="fa-solid fa-plus"></i> Nouvelle catégorie
@@ -48,6 +51,18 @@ $categories = $db->query("SELECT * FROM categories")->fetchAll(PDO::FETCH_ASSOC)
         <?php endforeach; ?>
     </tbody>
 </table>
+
+<script>
+    // barre de recherche (optionnelle)
+    document.getElementById('searchInput').addEventListener('input', function() {
+        const filter = this.value.toLowerCase();
+        const rows = document.querySelectorAll('table tbody tr');
+        rows.forEach(row => {
+            const nom = row.cells[1].textContent.toLowerCase();
+            row.style.display = nom.includes(filter) ? '' : 'none';
+        });
+    });
+</script>
 
         </body>
         </html>

@@ -25,6 +25,9 @@ $articles = $db->query("
 // $articles = $db->query("SELECT * FROM articles ORDER BY date_publication DESC")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
+<!-- // Barre de recherche (optionnelle) -->
+<input type="text" id="searchInput" placeholder="Rechercher un article..." class="search-input">
+
 <a href="ajouter.php" class="btn-new">
     <i class="fa-solid fa-plus"></i> Nouvel article
 </a>
@@ -61,6 +64,19 @@ $articles = $db->query("
         <?php endforeach; ?>
     </tbody>
 </table>
+
+<script>
+    // barre de recherche (optionnelle)
+    document.getElementById('searchInput').addEventListener('input', function() {
+        const filter = this.value.toLowerCase();
+        const rows = document.querySelectorAll('table tbody tr');
+        rows.forEach(row => {
+            const title = row.querySelector('td:first-child').textContent.toLowerCase();
+            row.style.display = title.includes(filter) ? '' : 'none';
+        });
+    });
+</script>
+
 
 </body>
 </html>

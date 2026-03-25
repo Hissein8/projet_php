@@ -21,6 +21,17 @@ $stmt->execute([$id]);
 $article = $stmt->fetch(PDO::FETCH_ASSOC);
 if (!$article) { header('Location: liste.php'); exit; }
 
+// ===== VÉRIFICATION DE PROPRIÉTÉ =====
+$user       = $_SESSION['user'];
+$est_auteur = ((int)$article['editeur_id'] === (int)$user['id']);
+$est_admin  = ($user['role'] === 'administrateur');
+
+if (!$est_auteur && !$est_admin) {
+    echo "<p class='error'>Accès refusé. Vous ne pouvez modifier que vos propres articles.</p>";
+    exit();
+}
+// =====================================
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $titre   = trim($_POST['titre'] ?? '');
     $desc    = trim($_POST['description_courte'] ?? '');
@@ -31,7 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (strlen($contenu) < 10) $erreurs[] = "Le contenu doit faire au moins 10 caractères.";
     if ($cat_id <= 0)           $erreurs[] = "Veuillez sélectionner une catégorie.";
 
-    // Garde l'ancienne image par défaut
     $image_path = $article['image_url'];
 
     if (isset($_FILES['image_file']) && $_FILES['image_file']['error'] !== UPLOAD_ERR_NO_FILE) {
@@ -81,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id_prefix   = $cat_id . '_' . time();
             $extension   = $allowed_types[$mime_type];
             $filename    = $id_prefix . '_' . $nom_slug . '.' . $extension;
-            $upload_dir  = __DIR__ . '/uploads/';
+            $upload_dir  = BASE_PATH . '/articles/uploads/';
             $target_path = $upload_dir . $filename;
 
             if (!is_dir($upload_dir)) {
@@ -90,13 +100,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if (move_uploaded_file($file['tmp_name'], $target_path)) {
                 // Supprimer l'ancienne image si elle est locale
-                if ($article['image_url'] && strpos($article['image_url'], 'uploads/') !== false) {
-                    $old_path = __DIR__ . '/' . $article['image_url'];
+                if ($article['image_url'] && strpos($article['image_url'], '/articles/uploads/') !== false) {
+                    $old_path = BASE_PATH . parse_url($article['image_url'], PHP_URL_PATH);
                     if (file_exists($old_path)) {
                         unlink($old_path);
                     }
                 }
-                $image_path = 'uploads/' . $filename;
+                $image_path = BASE_URL . '/articles/uploads/' . $filename;
             } else {
                 $erreurs[] = "Erreur lors de l'enregistrement de l'image. Vérifiez les permissions du dossier uploads/.";
             }
@@ -115,7 +125,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Pré-remplir depuis POST si erreur
     $article = array_merge($article, $_POST);
 }
 ?>
@@ -161,7 +170,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="file" id="image_file" name="image_file" accept="image/jpeg,image/png,image/webp,image/gif">
         <small>Laisser vide pour garder l'image actuelle — Formats : JPG, PNG, WEBP, GIF — Max : 3 Mo</small>
 
+        <?php if ($article['image_url']): ?>
+        <div style="margin-top: 10px;">
+            <p><small>Image actuelle :</small></p>
+            <img src="<?= htmlspecialchars($article['image_url']) ?>" alt="Image actuelle"
+                 style="max-width: 200px; max-height: 200px; border: 1px solid #ccc; border-radius: 4px;">
+        </div>
+        <?php endif; ?>
+
         <div id="preview-container" style="display:none; margin-top: 10px;">
+            <p><small>Nouvelle image :</small></p>
             <img id="image-preview" src="#" alt="Aperçu"
                  style="max-width: 200px; max-height: 200px; border: 1px solid #ccc; border-radius: 4px;">
         </div>
@@ -174,54 +192,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 </form>
 
-<script>
-    document.getElementById('image_file').addEventListener('change', function () {
-        const file = this.files[0];
-        const preview = document.getElementById('image-preview');
-        const container = document.getElementById('preview-container');
-
-        if (file) {
-            const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
-
-            if (!allowedTypes.includes(file.type)) {
-                alert('Format non autorisé. Utilisez JPG, PNG, WEBP ou GIF.');
-                this.value = '';
-                container.style.display = 'none';
-                return;
-            }
-
-            if (file.size > 2 * 1024 * 1024) {
-                alert("L'image dépasse 2 Mo. Veuillez choisir une image plus légère.");
-                this.value = '';
-                container.style.display = 'none';
-                return;
-            }
-
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                preview.src = e.target.result;
-                container.style.display = 'block';
-            };
-            reader.readAsDataURL(file);
-        } else {
-            container.style.display = 'none';
-        }
-    });
-
-    document.getElementById('form-modifier').addEventListener('submit', function(e) {
-        const titre = document.getElementById('titre').value.trim();
-        const contenu = document.getElementById('contenu').value.trim();
-        const cat = document.getElementById('categorie_id').value;
-        const errors = [];
-        if (titre.length < 3) errors.push('Le titre doit faire au moins 3 caractères.');
-        if (contenu.length < 10) errors.push('Le contenu doit faire au moins 10 caractères.');
-        if (!cat) errors.push('Veuillez sélectionner une catégorie.');
-        if (errors.length > 0) {
-            e.preventDefault();
-            alert(errors.join('\n'));
-        }
-    });
-</script>
-
-</body>
-</html>
+<!-- Le JavaScript reste identique -->

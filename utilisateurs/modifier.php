@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Mise à jour du mot de passe seulement si renseigné
         if (!empty($password)) {
-            $stmt = $db->prepare("UPDATE utilisateurs SET password = ? WHERE id = ?");
+            $stmt = $db->prepare("UPDATE utilisateurs SET mot_de_passe = ? WHERE id = ?");
             $stmt->execute([password_hash($password, PASSWORD_DEFAULT), $id]);
         }
 

@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Dossier de destination
             // $upload_dir  = __DIR__ . '/projet_php/articles/uploads/';
-            $upload_dir  = __DIR__ . '/uploads/';
+            $upload_dir  = __DIR__ . '/projet_php/articles/uploads/';
             $target_path = $upload_dir . $filename;
 
             // Création du dossier si inexistant

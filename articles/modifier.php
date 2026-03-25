@@ -85,10 +85,57 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </select>
     </div>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
         <label for="image_url">URL de l'image</label>
         <input type="url" id="image_url" name="image_url" value="<?= htmlspecialchars($article['image_url'] ?? '') ?>">
+    </div> -->
+
+    <div class="form-group">
+        <label for="image_file">Image</label>
+        <input type="file" id="image_file" name="image_file" accept="image/jpeg,image/png,image/webp,image/gif">
+        <small>Formats acceptés : JPG, PNG, WEBP, GIF — Taille max : 2 Mo</small>
+
+        <div id="preview-container" style="display:none; margin-top: 10px;">
+            <img id="image-preview" src="#" alt="Aperçu"
+                 style="max-width: 200px; max-height: 200px; border: 1px solid #ccc; border-radius: 4px;">
+        </div>
     </div>
+
+     <script>
+    // Aperçu de l'image + validation immédiate à la sélection
+    document.getElementById('image_file').addEventListener('change', function () {
+        const file = this.files[0];
+        const preview = document.getElementById('image-preview');
+        const container = document.getElementById('preview-container');
+
+        if (file) {
+            const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+
+            if (!allowedTypes.includes(file.type)) {
+                alert('Format non autorisé. Utilisez JPG, PNG, WEBP ou GIF.');
+                this.value = '';
+                container.style.display = 'none';
+                return;
+            }
+
+            if (file.size > 2 * 1024 * 1024) {
+                alert("L'image dépasse 2 Mo. Veuillez choisir une image plus légère.");
+                this.value = '';
+                container.style.display = 'none';
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                container.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            container.style.display = 'none';
+        }
+    });
+</script>
 
     <div class="form-group">
         <button type="submit" class="btn btn-edit">Enregistrer</button>

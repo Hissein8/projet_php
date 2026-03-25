@@ -9,6 +9,14 @@ if (!isset($_SESSION['user']) || ($_SESSION['user']['role'] !== 'administrateur'
     exit();
 }
 
+
+// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+//     var_dump($_FILES);
+//     var_dump($_POST);
+//     die(); // stoppe l'exécution pour voir le résultat
+// }
+
+
 require_once '../menu.php';
 
 // ===== INITIALISATION =====
@@ -93,7 +101,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // $filename = $id_prefix . '_' . $nom_slug . '.' . $extension;
 
             // Dossier de destination
-            $upload_dir  = __DIR__ . '/projet_php/articles/uploads/';
+            // $upload_dir  = __DIR__ . '/projet_php/articles/uploads/';
+            $upload_dir  = __DIR__ . '/uploads/';
             $target_path = $upload_dir . $filename;
 
             // Création du dossier si inexistant
@@ -113,17 +122,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // ===== INSERTION EN BASE DE DONNÉES =====
     if (empty($erreurs)) {
         try {
+            // $stmt = $db->prepare("
+                // INSERT INTO articles (titre, description_courte, contenu, categorie_id, editeur_id, image_url, image_file)
+                // VALUES (?, ?, ?, ?, ?, ?, ?)
+            // ");
             $stmt = $db->prepare("
-                INSERT INTO articles (titre, description_courte, contenu, categorie_id, editeur_id, image_url, image_file)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
+                INSERT INTO articles (titre, description_courte, contenu, categorie_id, editeur_id, image_url)
+                VALUES (?, ?, ?, ?, ?, ?)
             ");
             $stmt->execute([
                 $titre,
                 $desc,
                 $contenu,
                 $cat_id,
-                $_SESSION['id'],
-                $img_url ?: null,
+                $_SESSION['user']['id'],
+                // $img_url ?: null,
                 $image_path
             ]);
 
@@ -131,10 +144,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
 
         } catch (PDOException $e) {
-            $erreurs[] = "Erreur lors de l'enregistrement en base de données.";
+            $erreurs[] = "Erreur lors de l'enregistrement en base de données : " . $e->getMessage();
             // Supprimer l'image si l'insertion échoue pour éviter les fichiers orphelins
-            if ($image_path && file_exists(__DIR__ . '/../' . $image_path)) {
-                unlink(__DIR__ . '/../' . $image_path);
+            if ($image_path && file_exists(__DIR__ . '/' . $image_path)) {
+                unlink(__DIR__ . '/' . $image_path);
             }
         }
     }

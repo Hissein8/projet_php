@@ -58,8 +58,6 @@ if (!$article) { header('Location: ../accueil.php'); exit; }
         <button class="btn-cancel">
             <a href="../accueil.php">← Retour à l'accueil</a>
         </button>
-        <!-- <a href="../accueil.php"><?= h
-        // tmlspecialchars($article['categorie']) ?></a> -->
     </div>
 
 </div>

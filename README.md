@@ -1,7 +1,7 @@
 # Application Web de Gestion (PHP / MySQL)
 
 ## Présentation
-Ce projet est une application web dynamique permettant la gestion de données (CRUD) via une interface utilisateur intuitive. Il met en pratique l'interaction entre un serveur backend en **PHP** et une base de données relationnelle **MySQL**.
+Ce projet est une application web dynamique permettant la gestion de données (CRUD), plus particulièrement d'articles via une interface utilisateur intuitive. Il met en pratique l'interaction entre un serveur backend en **PHP** et une base de données relationnelle **MySQL**.
 
 ## Fonctionnalités
 * **Interface CRUD :** Création, lecture, mise à jour et suppression d'enregistrements.
@@ -25,3 +25,8 @@ Ce projet est une application web dynamique permettant la gestion de données (C
 3. **lancement**
     placer le dossier dans votre serveur local (XAMPP, WAMPP, etc)
     accédez-y via localhost/projet_php
+
+## Auteurs
+**Mamadou DIA** - *Gestion complète des utilisateurs (ajout, consultation, modification, suppression) et des sessions sur les fichiers concernés* - [Lien GitHub](https://github.com/k4izen404)
+**Cheikh Mbacké DIENE** - *Gestion complète des articles (ajout, consultation, modification, suppression) et des sessions sur les fichiers concernés* - [Lien GitHub](https://github.com/cheikhouna03)
+**Hissein MAHAMAT ISSA** - *Gestion complète des catégories (ajout, consultation, modification, suppression) et des sessions sur les fichiers concernés* - [Lien GitHub](https://github.com/Hissein8)
